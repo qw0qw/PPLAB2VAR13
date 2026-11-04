@@ -1,6 +1,8 @@
 import unittest
 
 from services.input_splitter import extract_candidates
+from services.card_finder import find_cards
+from models.card_type import CardType
 
 
 class TestInputSplitter(unittest.TestCase):
@@ -39,6 +41,42 @@ class TestInputSplitter(unittest.TestCase):
         result = extract_candidates(text)
 
         self.assertEqual(result, [])
+
+
+
+class TestCardFinder(unittest.TestCase):
+
+    def test_find_valid_card(self):
+        text = "Карта: 4111111111111111"
+
+        results = find_cards(text)
+
+        self.assertEqual(len(results), 1)
+        self.assertTrue(results[0].is_valid)
+        self.assertEqual(results[0].card_type, CardType.VISA)
+
+    def test_find_invalid_card(self):
+        text = "Карта: 4111111111111112"
+
+        results = find_cards(text)
+
+        self.assertEqual(len(results), 1)
+        self.assertFalse(results[0].is_valid)
+
+    def test_find_multiple_cards(self):
+        text = "4111111111111111 и 5555555555554444"
+
+        results = find_cards(text)
+
+        self.assertEqual(len(results), 2)
+
+    def test_no_cards(self):
+        text = "Обычный текст без номеров"
+
+        results = find_cards(text)
+
+        self.assertEqual(results, [])
+
 
 
 if __name__ == "__main__":
