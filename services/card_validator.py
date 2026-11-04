@@ -13,7 +13,7 @@ def validate_card(number: str) -> CheckResult:
         if pattern.fullmatch(number):
             last_four = number[-4:]
 
-            if card_type != CardType.UNIONPAY and not check_luhn(number):
+            if card_type != CardType.UNIONPAY and not check_luhn(number): # У карт от UnionPay нет проверки с помощью Луна
                 return CheckResult(
                     last_four=last_four,
                     card_type=card_type,
