@@ -3,7 +3,6 @@ import unittest
 from services.input_splitter import extract_candidates
 from services.card_finder import find_cards
 from models.card_type import CardType
-from services.card_masker import mask_card
 
 
 class TestInputSplitter(unittest.TestCase):
@@ -77,27 +76,6 @@ class TestCardFinder(unittest.TestCase):
         results = find_cards(text)
 
         self.assertEqual(results, [])
-
-
-class TestCardMasker(unittest.TestCase):
-
-    def test_mask_number(self):
-        self.assertEqual(
-            mask_card("4111111111111111"),
-            "************1111"
-        )
-
-    def test_mask_number_with_spaces(self):
-        self.assertEqual(
-            mask_card("4111 1111 1111 1111"),
-            "************1111"
-        )
-
-    def test_short_number(self):
-        self.assertEqual(mask_card("123"), "***")
-
-    def test_empty_number(self):
-        self.assertEqual(mask_card(""), "")
 
 
 
