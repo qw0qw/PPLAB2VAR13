@@ -8,4 +8,4 @@ class CardType(Enum):
     MASTERCARD = "MasterCard"
     MIR = "Мир"
     AMERICAN_EXPRESS = "American Express"
-    UNIONPAY = "UnionPay" #iskl lun
+    UNIONPAY = "UnionPay"
