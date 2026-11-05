@@ -27,7 +27,7 @@ def show_results(results):
         )
 
         print(
-            f"{result} | "
+            f"  {result} | "
             f"Тип: {card_type} | "
             f"{result.reason}"
         )
